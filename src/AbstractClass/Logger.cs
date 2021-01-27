@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace AbstractClass
 {
@@ -63,26 +62,26 @@ namespace AbstractClass
     }
 
 
-    /// <summary>
-    /// 抽象类的子类: 输出日志到消息中间件(比如kafka)
-    /// </summary>
-    public class MessageQueueLogger : Logger
-    {
-        /// <summary>
-        /// 这是一个消息中间件
-        /// </summary>
-        private MessageQueueClient msgQueueClient;
+    ///// <summary>
+    ///// 抽象类的子类: 输出日志到消息中间件(比如kafka)
+    ///// </summary>
+    //public class MessageQueueLogger : Logger
+    //{
+    //    /// <summary>
+    //    /// 这是一个消息中间件
+    //    /// </summary>
+    //    private MessageQueueClient msgQueueClient;
 
-        public MessageQueueLogger(string name, bool enabled,
-          Level minPermittedLevel, MessageQueueClient msgQueueClient) : base(name, enabled, minPermittedLevel)
-        {
-            this.msgQueueClient = msgQueueClient;
-        }
+    //    public MessageQueueLogger(string name, bool enabled,
+    //      Level minPermittedLevel, MessageQueueClient msgQueueClient) : base(name, enabled, minPermittedLevel)
+    //    {
+    //        this.msgQueueClient = msgQueueClient;
+    //    }
 
-        protected override void DoLog(Level level, String mesage)
-        {
-            // 格式化level和message,输出到消息中间件
-            msgQueueClient.send("");
-        }
-    }
+    //    protected override void DoLog(Level level, String mesage)
+    //    {
+    //        // 格式化level和message,输出到消息中间件
+    //        msgQueueClient.send("");
+    //    }
+    //}
 }
