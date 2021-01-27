@@ -9,7 +9,8 @@ namespace DesignPattern.Builder
             // 这段代码会抛出IllegalArgumentException，因为minIdle>maxIdle
             ResourcePoolConfig config = new ResourcePoolConfig.Builder() 
                 .setName("dbconnectionpool") 
-                .setMaxTotal(16) .setMaxIdle(15) 
+                .setMaxTotal(16) 
+                .setMaxIdle(15) 
                 .setMinIdle(12) 
                 .build();
             config.Test();
