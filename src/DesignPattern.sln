@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PerformanceCounter", "Perfo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceCounterTest", "PerformanceCounterTest\PerformanceCounterTest.csproj", "{E98407E6-B456-4223-A3BA-94D0E81BAA2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPattern.Builder", "DesignPattern.Builder\DesignPattern.Builder.csproj", "{78214CE8-8D4F-4F4E-B8C0-7C7A63708AF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{E98407E6-B456-4223-A3BA-94D0E81BAA2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E98407E6-B456-4223-A3BA-94D0E81BAA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E98407E6-B456-4223-A3BA-94D0E81BAA2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78214CE8-8D4F-4F4E-B8C0-7C7A63708AF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78214CE8-8D4F-4F4E-B8C0-7C7A63708AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78214CE8-8D4F-4F4E-B8C0-7C7A63708AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78214CE8-8D4F-4F4E-B8C0-7C7A63708AF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{763615FC-0D13-4A80-B805-3CB93E67E26A} = {D68CE5F3-313E-43A4-AD40-C0AC7793E1A7}
 		{F8F380BF-761D-42ED-8139-210E26420CB0} = {D68CE5F3-313E-43A4-AD40-C0AC7793E1A7}
 		{E98407E6-B456-4223-A3BA-94D0E81BAA2D} = {D68CE5F3-313E-43A4-AD40-C0AC7793E1A7}
+		{78214CE8-8D4F-4F4E-B8C0-7C7A63708AF0} = {D93CB528-ABD8-49C5-B7F5-1BBCB5B91B9A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93288348-90EB-442A-B4FD-95C77B2ACDA5}
