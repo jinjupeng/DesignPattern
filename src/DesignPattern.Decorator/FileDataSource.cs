@@ -21,13 +21,18 @@ namespace DesignPattern.Decorator
             string myStr = string.Empty;
             try
             {
-                FileStream fsRead = new FileStream(name, FileMode.Open);
-                int fsLen = (int)fsRead.Length;
-                byte[] heByte = new byte[fsLen];
-                int r = fsRead.Read(heByte, 0, heByte.Length);
-                myStr = Encoding.Default.GetString(heByte);
-                fsRead.Close();
-                fsRead.Dispose();
+                //FileStream fsRead = new FileStream(name, FileMode.Open);
+                //int fsLen = (int)fsRead.Length;
+                //byte[] heByte = new byte[fsLen];
+                //int r = fsRead.Read(heByte, 0, heByte.Length);
+                //myStr = Encoding.Default.GetString(heByte);
+                //fsRead.Close();
+                //fsRead.Dispose();
+                StreamReader srReadFile = new StreamReader(name);
+                myStr = srReadFile.ReadLine(); //读取每行数据
+                                                            // 关闭读取流文件
+                srReadFile.Close();
+                srReadFile.Dispose();
             }
             catch (IOException ex)
             {

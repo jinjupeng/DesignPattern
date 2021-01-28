@@ -48,7 +48,7 @@ namespace DesignPattern.Decorator
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private static byte[] Compress(byte[] data)
+        private byte[] Compress(byte[] data)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace DesignPattern.Decorator
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private static byte[] Decompress(byte[] data)
+        private byte[] Decompress(byte[] data)
         {
             try
             {

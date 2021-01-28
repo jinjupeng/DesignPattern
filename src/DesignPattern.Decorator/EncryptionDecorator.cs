@@ -35,7 +35,7 @@ namespace DesignPattern.Decorator
             {
                 result[i] += 1;
             }
-            
+            string a = Convert.ToBase64String(result);
             return Convert.ToBase64String(result);
         }
 
