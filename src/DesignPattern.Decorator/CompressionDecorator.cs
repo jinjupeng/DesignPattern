@@ -1,5 +1,7 @@
 ﻿using System;
-using System.Buffers.Text;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace DesignPattern.Decorator
 {
@@ -10,70 +12,95 @@ namespace DesignPattern.Decorator
     {
         private int compLevel = 6;
 
-        public CompressionDecorator(IDataSource source) : base(source)
+        public CompressionDecorator(DataSource source) : base(source)
         {
 
         }
 
-        public int getCompressionLevel()
+        public int GetCompressionLevel()
         {
             return compLevel;
         }
 
-        public void setCompressionLevel(int value)
+        public void SetCompressionLevel(int value)
         {
             compLevel = value;
         }
 
-        public override void WriteData(String data)
+        public override void WriteData(string data)
         {
-            base.WriteData(Compress(data));
+            var compressBeforeByte = Encoding.Default.GetBytes(data);
+            var compressAfterByte = Compress(compressBeforeByte);
+            string compressString = Convert.ToBase64String(compressAfterByte);
+            base.WriteData(compressString);
         }
 
         public override string ReadData()
         {
-            return decompress(base.ReadData());
+            var compressBeforeByte = Convert.FromBase64String(base.ReadData());
+            var compressAfterByte = Decompress(compressBeforeByte);
+            string compressString = Encoding.Default.GetString(compressAfterByte);
+            return compressString;
         }
 
-        private string Compress(string stringData)
+        /// <summary>
+        /// Compress
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private static byte[] Compress(byte[] data)
         {
-            byte[] data = stringData.getBytes();
             try
             {
-                ByteArrayOutputStream bout = new ByteArrayOutputStream(512);
-                DeflaterOutputStream dos = new DeflaterOutputStream(bout, new Deflater(compLevel));
-                dos.write(data);
-                dos.close();
-                bout.close();
-                return Base64.getEncoder().encodeToString(bout.toByteArray());
+                var ms = new MemoryStream();
+                var zip = new GZipStream(ms, CompressionMode.Compress, true);
+                zip.Write(data, 0, data.Length);
+                zip.Close();
+                var buffer = new byte[ms.Length];
+                ms.Position = 0;
+                ms.Read(buffer, 0, buffer.Length);
+                ms.Close();
+                return buffer;
+
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return null;
+                throw new Exception(e.Message);
             }
         }
 
-        private string decompress(string stringData)
+        /// <summary>
+        /// Decompress
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private static byte[] Decompress(byte[] data)
         {
-            byte[] data = Base64.getDecoder().decode(stringData);
             try
             {
-                InputStream in = new ByteArrayInputStream(data);
-                InflaterInputStream iin = new InflaterInputStream(in);
-                ByteArrayOutputStream bout = new ByteArrayOutputStream(512);
-                int b;
-                while ((b = iin.read()) != -1)
+                var ms = new MemoryStream(data);
+                var zip = new GZipStream(ms, CompressionMode.Decompress, true);
+                var msreader = new MemoryStream();
+                var buffer = new byte[0x1000];
+                while (true)
                 {
-                    bout.write(b);
+                    var reader = zip.Read(buffer, 0, buffer.Length);
+                    if (reader <= 0)
+                    {
+                        break;
+                    }
+                    msreader.Write(buffer, 0, reader);
                 }
-            in.close();
-                iin.close();
-                bout.close();
-                return new string(bout.toByteArray());
+                zip.Close();
+                ms.Close();
+                msreader.Position = 0;
+                buffer = msreader.ToArray();
+                msreader.Close();
+                return buffer;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return null;
+                throw new Exception(e.Message);
             }
         }
     }

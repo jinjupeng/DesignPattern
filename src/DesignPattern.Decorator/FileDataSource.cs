@@ -1,11 +1,13 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Text;
 
 namespace DesignPattern.Decorator
 {
     /// <summary>
     /// 简单数据读写器
     /// </summary>
-    public class FileDataSource : IDataSource
+    public class FileDataSource : DataSource
     {
         private string name;
 
@@ -14,29 +16,45 @@ namespace DesignPattern.Decorator
             this.name = name;
         }
 
-        public string ReadData()
+        public override string ReadData()
         {
-            File file = new File(name);
-            try (OutputStream fos = new FileOutputStream(file)) {
-                fos.write(data.getBytes(), 0, data.length());
-            } catch (IOException ex)
+            string myStr = string.Empty;
+            try
             {
-                System.out.println(ex.getMessage());
+                FileStream fsRead = new FileStream(name, FileMode.Open);
+                int fsLen = (int)fsRead.Length;
+                byte[] heByte = new byte[fsLen];
+                int r = fsRead.Read(heByte, 0, heByte.Length);
+                myStr = Encoding.Default.GetString(heByte);
+                fsRead.Close();
+                fsRead.Dispose();
             }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return myStr;
         }
 
-        public void WriteData(string data)
+        public override void WriteData(string data)
         {
-            char[] buffer = null;
-            File file = new File(name);
-            try (FileReader reader = new FileReader(file)) {
-                buffer = new char[(int)file.length()];
-                reader.read(buffer);
-            } catch (IOException ex)
+            try
             {
-                System.out.println(ex.getMessage());
+                if (!File.Exists(name))
+                {
+                    FileStream f = File.Create(name);
+                    f.Close();
+                    f.Dispose();
+                }
+                StreamWriter f2 = new StreamWriter(name, true, Encoding.UTF8);
+                f2.WriteLine(data);
+                f2.Close();
+                f2.Dispose();
             }
-            return new string(buffer);
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

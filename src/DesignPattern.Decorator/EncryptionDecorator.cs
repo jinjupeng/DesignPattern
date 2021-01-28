@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DesignPattern.Decorator
 {
@@ -8,7 +9,7 @@ namespace DesignPattern.Decorator
     public class EncryptionDecorator : DataSourceDecorator
     {
 
-        public EncryptionDecorator(IDataSource source) : base(source)
+        public EncryptionDecorator(DataSource source) : base(source)
         {
         }
 
@@ -22,24 +23,35 @@ namespace DesignPattern.Decorator
             return Decode(base.ReadData());
         }
 
+        /// <summary>
+        /// 编码
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private string Encode(string data)
         {
-            byte[] result = data.getBytes();
-            for (int i = 0; i < result.length; i++)
+            byte[] result = Encoding.Default.GetBytes(data);
+            for (int i = 0; i < result.Length; i++)
             {
-                result[i] += (byte)1;
+                result[i] += 1;
             }
-            return Base64.getEncoder().encodeToString(result);
+            
+            return Convert.ToBase64String(result);
         }
 
+        /// <summary>
+        /// 解码
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private string Decode(string data)
         {
-            byte[] result = Base64.getDecoder().decode(data);
-            for (int i = 0; i < result.length; i++)
+            byte[] result = Convert.FromBase64String(data);
+            for (int i = 0; i < result.Length; i++)
             {
-                result[i] -= (byte)1;
+                result[i] -= 1;
             }
-            return new string(result);
+            return Encoding.Default.GetString(result);
         }
     }
 }

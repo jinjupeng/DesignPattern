@@ -5,21 +5,21 @@ namespace DesignPattern.Decorator
     /// <summary>
     /// 抽象基础装饰
     /// </summary>
-    public abstract class DataSourceDecorator : IDataSource
+    public abstract class DataSourceDecorator : DataSource
     {
-        private readonly IDataSource wrappee;
+        private readonly DataSource wrappee;
 
-        public DataSourceDecorator(IDataSource source)
+        public DataSourceDecorator(DataSource source)
         {
             this.wrappee = source;
         }
 
-        public void WriteData(string data)
+        public override void WriteData(string data)
         {
             wrappee.WriteData(data);
         }
 
-        public string ReadData()
+        public override string ReadData()
         {
             return wrappee.ReadData();
         }

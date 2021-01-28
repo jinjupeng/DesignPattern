@@ -12,9 +12,9 @@ namespace DesignPattern.Decorator
             string salaryRecords = "Name,Salary\nJohn Smith,100000\nSteven Jobs,912000";
             DataSourceDecorator encoded = new CompressionDecorator(
                                              new EncryptionDecorator(
-                                                 new FileDataSource("out/OutputDemo.txt")));
+                                                 new FileDataSource("OutputDemo.txt")));
             encoded.WriteData(salaryRecords);
-            IDataSource plain = new FileDataSource("out/OutputDemo.txt");
+            DataSource plain = new FileDataSource("OutputDemo.txt");
 
             Console.WriteLine("- Input ----------------");
             Console.WriteLine();
@@ -24,6 +24,19 @@ namespace DesignPattern.Decorator
             Console.WriteLine("- Decoded --------------");
             Console.WriteLine(encoded.ReadData());
             Console.WriteLine("Hello World!");
+
+            /*
+                - Input ----------------
+                Name,Salary
+                John Smith,100000
+                Steven Jobs,912000
+                - Encoded --------------
+                Zkt7e1Q5eU8yUm1Qe0ZsdHJ2VXp6dDBKVnhrUHtUe0sxRUYxQkJIdjVLTVZ0dVI5Q2IwOXFISmVUMU5rcENCQmdxRlByaD4+
+                - Decoded --------------
+                Name,Salary
+                John Smith,100000
+                Steven Jobs,912000
+             */
         }
     }
 }
