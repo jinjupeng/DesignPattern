@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DesignPattern.Decorator
+﻿namespace DesignPattern.Decorator
 {
     /// <summary>
     /// 抽象基础装饰

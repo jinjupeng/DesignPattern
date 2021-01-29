@@ -18,19 +18,13 @@ namespace DesignPattern.Decorator
 
         public override string ReadData()
         {
-            string myStr = string.Empty;
+            string txtStr = string.Empty;
             try
             {
-                //FileStream fsRead = new FileStream(name, FileMode.Open);
-                //int fsLen = (int)fsRead.Length;
-                //byte[] heByte = new byte[fsLen];
-                //int r = fsRead.Read(heByte, 0, heByte.Length);
-                //myStr = Encoding.Default.GetString(heByte);
-                //fsRead.Close();
-                //fsRead.Dispose();
                 StreamReader srReadFile = new StreamReader(name);
-                myStr = srReadFile.ReadLine(); //读取每行数据
-                                                            // 关闭读取流文件
+                // 一次读取一行数据，如果需要读取全部数据，则需要while循环
+                txtStr = srReadFile.ReadLine();
+                // 关闭读取流文件
                 srReadFile.Close();
                 srReadFile.Dispose();
             }
@@ -38,7 +32,7 @@ namespace DesignPattern.Decorator
             {
                 Console.WriteLine(ex.Message);
             }
-            return myStr;
+            return txtStr;
         }
 
         public override void WriteData(string data)
