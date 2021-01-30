@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DesignPattern.Iterator
+﻿namespace DesignPattern.Iterator
 {
     // Concrete Iterators implement various traversal algorithms. These classes
     // store the current traversal position at all times.
