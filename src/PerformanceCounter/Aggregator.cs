@@ -35,10 +35,13 @@ namespace PerformanceCounter
             }
             long tps = (long)(count / durationInMillis * 1000);
 
-            requestInfos.Sort(delegate (RequestInfo o1, RequestInfo o2)
-            {
-                return o1.responseTime.CompareTo(o2.responseTime);
-            });
+            // 在Lambda表达式中使用Comparison<T>进行排序
+            requestInfos.Sort((x, y) => x.responseTime.CompareTo(y.responseTime));
+            // 等价于
+            //requestInfos.Sort(delegate (RequestInfo o1, RequestInfo o2)
+            //{
+            //    return o1.responseTime.CompareTo(o2.responseTime);
+            //});
 
             int idx999 = (int)(count * 0.999);
             int idx99 = (int)(count * 0.99);
