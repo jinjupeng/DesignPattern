@@ -3,7 +3,7 @@
 /// <summary>
 /// 开放封闭原则
 /// </summary>
-namespace Basic.OCP
+namespace SOLID.OCP
 {
     class Program
     {

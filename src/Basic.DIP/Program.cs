@@ -3,7 +3,7 @@
 /// <summary>
 /// 依赖倒置原则
 /// </summary>
-namespace Basic.DIP
+namespace SOLID.DIP
 {
     class Program
     {

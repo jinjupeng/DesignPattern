@@ -3,7 +3,7 @@
 /// <summary>
 /// 接口分离原则
 /// </summary>
-namespace Basic.ISP
+namespace SOLID.ISP
 {
     class Program
     {
