@@ -3,30 +3,26 @@ using System.Threading;
 
 namespace DesignPattern.Singleton
 {
-
     class Program
     {
         static void Main(string[] args)
         {
             #region 基础单例
 
-            //// The client code.
-            //Singleton s1 = Singleton.GetInstance();
-            //Singleton s2 = Singleton.GetInstance();
+            BaseSingleton s1 = BaseSingleton.GetInstance();
+            BaseSingleton s2 = BaseSingleton.GetInstance();
 
-            //if (s1 == s2)
-            //{
-            //    Console.WriteLine("Singleton works, both variables contain the same instance.");
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Singleton failed, variables contain different instances.");
-            //}
+            if (s1 == s2)
+            {
+                Console.WriteLine("Singleton works, both variables contain the same instance.");
+            }
+            else
+            {
+                Console.WriteLine("Singleton failed, variables contain different instances.");
+            }
             #endregion
 
-            #region 线程安全单例
-
-            // The client code.
+            #region 线程安全单锁单例
 
             Console.WriteLine(
                 "{0}\n{1}\n\n{2}\n",
@@ -54,8 +50,8 @@ namespace DesignPattern.Singleton
 
             #region 线程安全双锁单例
 
-            Console.WriteLine(Singleton.Instance.DoSomething("Hay"));
-            Console.WriteLine(Singleton.Instance.DoSomething("Halo"));
+            Console.WriteLine(DoubleLockSingleton.Instance.DoSomething("Hay"));
+            Console.WriteLine(DoubleLockSingleton.Instance.DoSomething("Halo"));
             Console.ReadLine();
 
             #endregion
@@ -63,7 +59,7 @@ namespace DesignPattern.Singleton
 
         public static void TestSingleton(string value)
         {
-            Singleton singleton = Singleton.GetInstance(value);
+            SingleLockSingleton singleton = SingleLockSingleton.GetInstance(value);
             Console.WriteLine(singleton.Value);
         }
     }

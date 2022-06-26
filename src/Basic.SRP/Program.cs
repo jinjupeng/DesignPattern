@@ -3,7 +3,7 @@
 /// <summary>
 /// 单一职责原则
 /// </summary>
-namespace Basic.SRP
+namespace SOLID.SRP
 {
     class Program
     {

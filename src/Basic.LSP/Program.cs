@@ -3,7 +3,7 @@
 /// <summary>
 /// 里氏替换原则
 /// </summary>
-namespace Basic.LSP
+namespace SOLID.LSP
 {
     class Program
     {
